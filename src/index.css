@@ -52,3 +52,9 @@ ol, ul {
 .btn-bold {
   font-weight: bold;
 }
+
+.square-highlight {
+  color: red;
+  background-color: black;
+  font-weight: bold;
+}
