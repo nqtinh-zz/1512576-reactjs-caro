@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-const size = 10;
+const size = 8;
 const nSquareToWin = 5;
 
 function Square(props) {
@@ -40,7 +40,6 @@ class SquareRow extends React.Component {
         }
         if (winner.direction === "LeftDown" &&
           idx <= winner.x && idx >= winner.x - nSquareToWin + 1 && winner.x - idx === rowidd - winner.y) {
-            console.log(winner.x+' '+winner.y+' '+idx+' '+rowidd+' '+nSquareToWin);
             win = true;
         }
       }
