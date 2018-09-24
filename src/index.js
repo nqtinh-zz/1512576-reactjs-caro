@@ -24,28 +24,28 @@ class SquareRow extends React.Component {
       let k = "s" + idx;
       let win = false;
       let winner = this.props.winner;
-      let rowIdx = this.props.rowIdx;
+      let rowidd = this.props.rowidd;
       if (winner) {
         if (winner.direction === "Right" &&
-          idx >= winner.x && idx <= winner.x + nSquareToWin - 1 && rowIdx === winner.y) {
+          idx >= winner.x && idx <= winner.x + nSquareToWin - 1 && rowidd === winner.y) {
             win = true;
         }
         if (winner.direction === "Down" &&
-            rowIdx >= winner.y && rowIdx <= winner.y + nSquareToWin - 1 && idx === winner.x) {
+        rowidd >= winner.y && rowidd <= winner.y + nSquareToWin - 1 && idx === winner.x) {
             win = true;
         }
         if (winner.direction === "RightDown" &&
-          idx >= winner.x && idx <= winner.x + nSquareToWin - 1 && idx - winner.x === rowIdx - winner.y) {
+          idx >= winner.x && idx <= winner.x + nSquareToWin - 1 && idx - winner.x === rowidd - winner.y) {
             win = true;
         }
         if (winner.direction === "LeftDown" &&
-          idx <= winner.x && idx >= winner.x - nSquareToWin + 1 && winner.x - idx === rowIdx - winner.y) {
-            console.log(winner.x+' '+winner.y+' '+idx+' '+rowIdx+' '+nSquareToWin);
+          idx <= winner.x && idx >= winner.x - nSquareToWin + 1 && winner.x - idx === rowidd - winner.y) {
+            console.log(winner.x+' '+winner.y+' '+idx+' '+rowidd+' '+nSquareToWin);
             win = true;
         }
       }
       return (
-        <Square win={win} value={square} onClick={() => this.props.onClick(this.props.rowIdx, idx)} key={k} />
+        <Square win={win} value={square} onClick={() => this.props.onClick(this.props.rowidd, idx)} key={k} />
       )
     })
     return (
@@ -71,7 +71,7 @@ class Board extends React.Component {
     board = this.props.squares.map((row, idx) => {
       let k = "r" + idx;
       return (
-        <SquareRow winner={this.props.winner} rowIdx={idx} row={row} onClick={this.props.onClick} key={k}/>
+        <SquareRow winner={this.props.winner} rowidd={idx} row={row} onClick={this.props.onClick} key={k}/>
       )
     })
     return (
