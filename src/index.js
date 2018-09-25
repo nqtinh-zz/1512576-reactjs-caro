@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-const size = 8;
-const nSquareToWin = 5;
+const size = 4;
+const nSquareToWin = 3;
 
 function Square(props) {
   return (props.win) ? (
