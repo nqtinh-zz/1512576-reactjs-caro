@@ -154,7 +154,6 @@ class Game extends React.Component {
       status = 'Nobody win';
       alert("Nobody win");
     }
-    let arrow = this.state.isDescending ? '↓' : '↑'
 
     return (
       <div className="game">
@@ -167,7 +166,7 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
             <div>
-              <button onClick={this.sort}>Thứ tự bước {arrow}</button>
+              <button onClick={this.sort}>Đổi thứ tự</button>
             </div>
             <div>{status}</div>
             <ol>{moves}</ol>
