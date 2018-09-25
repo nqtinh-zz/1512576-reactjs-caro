@@ -25,23 +25,12 @@ class SquareRow extends React.Component {
       let win = false;
       let winner = this.props.winner;
       let rowidd = this.props.rowidd;
-      if (winner) {
-        if (winner.direction === "Right" &&
-          idx >= winner.x && idx <= winner.x + nSquareToWin - 1 && rowidd === winner.y) {
-            win = true;
-        }
-        if (winner.direction === "Down" &&
-        rowidd >= winner.y && rowidd <= winner.y + nSquareToWin - 1 && idx === winner.x) {
-            win = true;
-        }
-        if (winner.direction === "RightDown" &&
-          idx >= winner.x && idx <= winner.x + nSquareToWin - 1 && idx - winner.x === rowidd - winner.y) {
-            win = true;
-        }
-        if (winner.direction === "LeftDown" &&
-          idx <= winner.x && idx >= winner.x - nSquareToWin + 1 && winner.x - idx === rowidd - winner.y) {
-            win = true;
-        }
+      if (winner) 
+      {
+        if (winner.direction === "Right" &&idx >= winner.x && idx <= winner.x + nSquareToWin - 1 && rowidd === winner.y) {win = true;}
+        if (winner.direction === "Down" &&rowidd >= winner.y && rowidd <= winner.y + nSquareToWin - 1 && idx === winner.x) {win = true;}
+        if (winner.direction === "RightDown" &&idx >= winner.x && idx <= winner.x + nSquareToWin - 1 && idx - winner.x === rowidd - winner.y) {win = true;}
+        if (winner.direction === "LeftDown" &&idx <= winner.x && idx >= winner.x - nSquareToWin + 1 && winner.x - idx === rowidd - winner.y) {win = true;}
       }
       return (
         <Square win={win} value={square} onClick={() => this.props.onClick(this.props.rowidd, idx)} key={k} />
@@ -96,8 +85,7 @@ class Game extends React.Component {
       stepNumber: 0,
       xIsNext: true,
       isDescending: true,
-    };
-    this.sort = this.sort.bind(this);
+    };this.sort = this.sort.bind(this);
   }
 
   handleClick(i,j) {
@@ -129,9 +117,7 @@ class Game extends React.Component {
     })
   }
 
-  sort() {
-    this.setState({isDescending: !this.state.isDescending});
-  }
+  sort() {this.setState({isDescending: !this.state.isDescending});}
 
   render() {
     const history = this.state.history;
@@ -154,16 +140,16 @@ class Game extends React.Component {
       </li>
       );
     });
-    if (!this.state.isDescending) {
-      moves = moves.reverse();
-    }
+    if (!this.state.isDescending) {moves = moves.reverse();}
     console.log(stepp);
     let status;
     if (winner) {
       status = 'Winner: ' + winner.val;
-    }if(winner!==true) {
+    }
+    if(winner!==true) {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
-    }if(winner!==true && stepp===9){
+    }
+    if(winner!==true && stepp===9){
       console.log(stepp);
       status = 'Nobody win';
       alert("Nobody win");
@@ -195,46 +181,34 @@ class Game extends React.Component {
 
 ReactDOM.render(<Game />, document.getElementById("root"));
 
-function calculateWinner(squares) {
-  let win;
+function calculateWinner(squares) {let win;
   for (let i = 0; i < squares.length; i++) {
     for (let j = 0; j < squares[i].length; j++) {
-      //Kiểm trang NSquareToWin ô liên tiếp từ ô xuất phát sang phải, xuống góc phải dưới, xuống góc trái dưới
-      //Nếu có NSquareToWin - 1 cặp liên tiếp giống nhau thì thắng
-      //Direction: ToRight, ToRightDown, ToDown, ToLeftDown
       if (!squares[i][j]) continue;
-      if (j <= squares[i].length - nSquareToWin) {
-        win = true;
+      if (j <= squares[i].length - nSquareToWin) {win = true;
         for (let k = 0; k < nSquareToWin - 1; k++) {
-          if (squares[i][j + k] !== squares[i][j + k + 1]) {
-            win = false
+          if (squares[i][j + k] !== squares[i][j + k + 1]) {win = false
           }
         }
         if (win) return {val: squares[i][j], x: j, y: i, direction: 'Right'};
       }
-      if (i <= squares.length - nSquareToWin) {
-        win = true;
+      if (i <= squares.length - nSquareToWin) {win = true;
         for (let k = 0; k < nSquareToWin - 1; k++) {
-          if (squares[i + k][j] !== squares[i + k + 1][j]) {
-            win = false
+          if (squares[i + k][j] !== squares[i + k + 1][j]) {win = false
           }
         }
         if (win) return {val: squares[i][j], x: j, y: i, direction: 'Down'};
       }
-      if (j <= squares[i].length - nSquareToWin && i <= squares.length - nSquareToWin) {
-        win = true;
+      if (j <= squares[i].length - nSquareToWin && i <= squares.length - nSquareToWin) {win = true;
         for (let k = 0; k < nSquareToWin - 1; k++) {
-          if (squares[i + k][j + k] !== squares[i + k + 1][j + k + 1]) {
-            win = false
+          if (squares[i + k][j + k] !== squares[i + k + 1][j + k + 1]) { win = false
           }
         }
         if (win) return {val: squares[i][j], x: j, y: i, direction: 'RightDown'};
       }
-      if (i <= squares.length - nSquareToWin && j >= nSquareToWin - 1) {
-        win = true;
+      if (i <= squares.length - nSquareToWin && j >= nSquareToWin - 1) {win = true;
         for (let k = 0; k < nSquareToWin - 1; k++) {
-          if (squares[i + k][j - k] !== squares[i + k + 1][j - k - 1]) {
-            win = false
+          if (squares[i + k][j - k] !== squares[i + k + 1][j - k - 1]) {win = false
           }
         }
         if (win) return {val: squares[i][j], x: j, y: i, direction: 'LeftDown'};
@@ -243,3 +217,4 @@ function calculateWinner(squares) {
   }
   return null;
 }
+
