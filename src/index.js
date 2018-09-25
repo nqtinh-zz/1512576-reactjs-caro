@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-const size = 4;
+const size = 3;
 const nSquareToWin = 3;
 
 function Square(props) {
@@ -137,11 +137,13 @@ class Game extends React.Component {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
-
+    var stepp;
     let moves = history.map((step, move) => {
+      
       const desc = move ?
         'Go to move #' + move + ' (' + step.location.x + ',' + step.location.y + ')' :
         'Go to game start';
+        stepp=move;
       return (this.state.stepNumber === move) ? (
         <li key={move}>
           <button className="btn-bold" onClick={() => this.jumpTo(move)}>{desc}</button>
@@ -155,12 +157,16 @@ class Game extends React.Component {
     if (!this.state.isDescending) {
       moves = moves.reverse();
     }
-
+    console.log(stepp);
     let status;
     if (winner) {
       status = 'Winner: ' + winner.val;
-    } else {
+    }if(winner!==true) {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    }if(winner!==true && stepp===9){
+      console.log(stepp);
+      status = 'Nobody win';
+      alert("Nobody win");
     }
     let arrow = this.state.isDescending ? '↓' : '↑'
 
